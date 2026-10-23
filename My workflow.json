@@ -1,0 +1,711 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "labelIds": [
+            "INBOX"
+          ],
+          "q": "subject:NETFLIX DATA",
+          "readStatus": "unread"
+        },
+        "options": {
+          "downloadAttachments": true
+        }
+      },
+      "id": "82b9fd1a-49bb-4f09-b9f4-85deb84f4834",
+      "name": "Gmail Trigger",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -48,
+        -176
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "8Hnsq9kCkhAGAwvM",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "binaryPropertyName": "attachment_0",
+        "options": {
+          "includeEmptyCells": true,
+          "rawData": true,
+          "skipRecordsWithErrors": {
+            "value": {
+              "enabled": true
+            }
+          }
+        }
+      },
+      "id": "b565e02b-3aa0-41e2-b3b1-183b12b948c9",
+      "name": "Extract from File",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.2,
+      "position": [
+        160,
+        32
+      ]
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "NETFLIX DATA",
+          "mode": "list",
+          "cachedResultName": "NETFLIX DATA"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "customer_id": "={{ $json.customer_id }}",
+            "age": "={{ $json.age }}",
+            "gender": "={{ $json.gender }}",
+            "subscription_type": "={{ $json.subscription_type }}",
+            "watch_hours": "={{ $json.watch_hours }}",
+            "last_login_days": "={{ $json.last_login_days }}",
+            "device": "={{ $json.device }}",
+            "region": "={{ $json.region }}",
+            "monthly_fee": "={{ $json.monthly_fee }}",
+            "churned": "={{ $json.churned }}",
+            "payment_method": "={{ $json.payment_method }}",
+            "number_of_profiles": "={{ $json.number_of_profiles }}",
+            "avg_watch_time_per_day": "={{ $json.avg_watch_time_per_day }}",
+            "favorite_genre": "={{ $json.favorite_genre }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "customer_id",
+              "displayName": "customer_id",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "age",
+              "displayName": "age",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "gender",
+              "displayName": "gender",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "subscription_type",
+              "displayName": "subscription_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "watch_hours",
+              "displayName": "watch_hours",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "last_login_days",
+              "displayName": "last_login_days",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "region",
+              "displayName": "region",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "device",
+              "displayName": "device",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "monthly_fee",
+              "displayName": "monthly_fee",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "churned",
+              "displayName": "churned",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "payment_method",
+              "displayName": "payment_method",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "number_of_profiles",
+              "displayName": "number_of_profiles",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "avg_watch_time_per_day",
+              "displayName": "avg_watch_time_per_day",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "favorite_genre",
+              "displayName": "favorite_genre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "e3cc1a4f-5a62-4c67-89e1-087617c6ce7e",
+      "name": "Insert rows in a table",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7,
+      "position": [
+        304,
+        -208
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "r9awf9ZzUwMLZo7J",
+          "name": "Postgres account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "14wbgPdIWZDNFfyJ5eOEsTCFhcsz8kNcUUKYjGFlDGPA"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gid=0",
+          "cachedResultName": "Sheet1"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "schema": []
+        },
+        "options": {
+          "handlingExtraData": "insertInNewColumn"
+        }
+      },
+      "id": "a15a3333-375e-464f-9e4f-5a712f47cc11",
+      "name": "Append rows in Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        480,
+        -16
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7d7OIF74BKI6LFp9",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $input.all().length }} Netflix customer rows were just loaded into the NETFLIX DATA table. Write the summary email body.",
+        "options": {
+          "systemMessage": "You write short, clear plain-text summary emails confirming that Netflix customer data was imported. Use the Google Sheets tool only if reference data is needed."
+        }
+      },
+      "id": "51c22fe1-e149-4834-b2f7-9db7a3d399dd",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        800,
+        -320
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "59f440a2-fc92-4f05-852e-b0abe5ed3559",
+      "name": "Google Gemini Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        736,
+        -16
+      ],
+      "credentials": {
+        "googlePalmApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "netflix-data-analysis"
+      },
+      "id": "f706e38e-4b5b-43f7-a1d7-fbba177a6e73",
+      "name": "Postgres Chat Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.4,
+      "position": [
+        880,
+        -16
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "r9awf9ZzUwMLZo7J",
+          "name": "Postgres account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "14wbgPdIWZDNFfyJ5eOEsTCFhcsz8kNcUUKYjGFlDGPA"
+        },
+        "options": {
+          "binaryPropertyName": "data",
+          "googleFileConversion": {
+            "conversion": {
+              "sheetsToFormat": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            }
+          },
+          "fileName": "Netflix data.xlsx"
+        }
+      },
+      "id": "f4c373c1-903f-45ae-98b8-bb1e26dbffc9",
+      "name": "Download spreadsheet as Excel",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1200,
+        -320
+      ],
+      "executeOnce": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "nB7Xbc09LXxIE5Kj",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "yashsaini1947@gmail.com",
+        "subject": "Netflix data processed",
+        "message": "={{ $('AI Agent').first().json.output }}",
+        "options": {
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {}
+            ]
+          }
+        }
+      },
+      "id": "f853509a-9db1-4f12-b2f0-e63216f0b90d",
+      "name": "Send a message",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1424,
+        -192
+      ],
+      "executeOnce": true,
+      "webhookId": "24643344-3996-4eec-a98c-296078c691bb",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "8Hnsq9kCkhAGAwvM",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "labelIds": [
+            "INBOX"
+          ],
+          "q": "subject:\"KPI REQUEST\" from:yashsaini1947@gmail.com",
+          "readStatus": "unread"
+        },
+        "options": {}
+      },
+      "id": "9ec07f7b-77cf-4681-baaa-8d1aa4b6a3f8",
+      "name": "KPI Request Trigger",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -96,
+        224
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "8Hnsq9kCkhAGAwvM",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Email subject: {{ $json.subject }}\n\nEmail body:\n{{ $json.text }}",
+        "options": {
+          "systemMessage": "You are a data analyst. An email asks for specific KPIs about Netflix customer data stored in the PostgreSQL table public.\"NETFLIX DATA\" (always quote the table name). Columns: customer_id, age, gender, subscription_type, watch_hours, last_login_days, region, device, monthly_fee, churned (1 = churned, 0 = active), payment_method, number_of_profiles, avg_watch_time_per_day, favorite_genre. Some columns may be text, so cast with ::numeric for math. The table may contain duplicate rows from repeated imports, so de-duplicate by customer_id (for example SELECT DISTINCT ON (customer_id) in a subquery) before computing KPIs. Use the run_sql_query tool with read-only SELECT queries only and never modify data. Compute only the KPIs the email asks for. If the email does not name specific KPIs, give: total customers, churn rate, average monthly fee, average watch hours. Write a short plain-text reply email with a small list of KPI names and values, plus one line stating any assumption. No subject line, no markdown tables."
+        }
+      },
+      "id": "abbc04ca-7d86-4b6c-b3f1-6dec1f930b36",
+      "name": "KPI Analyst",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        128,
+        224
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-sonnet-5-5",
+          "cachedResultName": "Claude Sonnet 5.5"
+        },
+        "options": {}
+      },
+      "id": "96d80d02-0ce1-4311-ae98-a829ee0c0be4",
+      "name": "KPI Claude Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.6,
+      "position": [
+        144,
+        448
+      ],
+      "credentials": {
+        "anthropicApi": {
+          "id": null,
+          "name": "Gateway credits",
+          "__aiGatewayManaged": true
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('sql_query', 'A single read-only PostgreSQL SELECT query over public.\"NETFLIX DATA\" (quote the table name). Use aggregates (COUNT, AVG, SUM, GROUP BY) and LIMIT 100 for raw rows.') }}",
+        "options": {}
+      },
+      "id": "f81adf7d-d791-4480-88b4-b2a1e6fa5d3e",
+      "name": "run_sql_query",
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.7,
+      "position": [
+        272,
+        448
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "r9awf9ZzUwMLZo7J",
+          "name": "Postgres account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "reply",
+        "messageId": "={{ $('KPI Request Trigger').first().json.id }}",
+        "emailType": "text",
+        "message": "={{ $json.output }}",
+        "options": {
+          "appendAttribution": false,
+          "replyToSenderOnly": true
+        }
+      },
+      "id": "d2fe4c85-1f51-400b-bcba-5ac3771b500f",
+      "name": "Reply with KPIs",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        480,
+        224
+      ],
+      "executeOnce": true,
+      "webhookId": "ecda2e41-9758-4300-90bc-50995163f2d9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "8Hnsq9kCkhAGAwvM",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "markAsRead",
+        "messageId": "={{ $('KPI Request Trigger').first().json.id }}"
+      },
+      "id": "0b10a028-545a-40a0-8be8-3e9cfd0ff2b3",
+      "name": "Mark request as read",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        704,
+        224
+      ],
+      "executeOnce": true,
+      "webhookId": "e3d1ce73-8996-4b44-ab2f-832300b1f024",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "8Hnsq9kCkhAGAwvM",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert rows in a table": {
+      "main": [
+        [
+          {
+            "node": "Append rows in Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append rows in Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Download spreadsheet as Excel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download spreadsheet as Excel": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "KPI Request Trigger": {
+      "main": [
+        [
+          {
+            "node": "KPI Analyst",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "KPI Analyst": {
+      "main": [
+        [
+          {
+            "node": "Reply with KPIs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "KPI Claude Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "KPI Analyst",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "run_sql_query": {
+      "ai_tool": [
+        [
+          {
+            "node": "KPI Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reply with KPIs": {
+      "main": [
+        [
+          {
+            "node": "Mark request as read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "13a40395-0c80-49fe-9340-82e708255f3c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "145e61e8a1f3fca8e43d3e9d7e034eb50454e29f0faf54d92b567d9dffb3b4ff"
+  },
+  "nodeGroups": [],
+  "id": "1bCgaPme4Esu2pUg",
+  "tags": []
+}
